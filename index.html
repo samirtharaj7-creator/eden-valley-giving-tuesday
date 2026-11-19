@@ -300,6 +300,25 @@ if('IntersectionObserver' in window){
 new IntersectionObserver(function(es,o){if(es[0].isIntersecting){seen=true;fill();o.disconnect();}},{threshold:.4}).observe(document.getElementById('meter'));
 }else{seen=true;fill();}
 })();
+
+// When shown inside the eden-valley.org Squarespace page (code block iframe):
+// report the page height, open Give links in the full window, and scroll the parent for in-page links.
+(function(){
+if(window.parent===window)return;
+function post(m){m.src='eden-gt';window.parent.postMessage(m,'*');}
+document.querySelectorAll('a[data-give]').forEach(function(a){if(/^https?:/.test(a.getAttribute('href')))a.target='_top';});
+var last=0;
+function height(){var h=document.documentElement.scrollHeight;if(h!==last){last=h;post({type:'height',h:h});}}
+if('ResizeObserver' in window)new ResizeObserver(height).observe(document.body);
+window.addEventListener('load',height);setInterval(height,1000);height();
+document.addEventListener('click',function(e){
+var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;
+var id=a.getAttribute('href');if(id.length<2)return;
+var el=document.querySelector(id);if(!el)return;
+e.preventDefault();
+post({type:'scroll',y:el.getBoundingClientRect().top+window.scrollY});
+});
+})();
 </script>
 </body>
 </html>
