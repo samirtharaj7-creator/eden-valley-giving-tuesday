@@ -352,6 +352,9 @@ new IntersectionObserver(function(es,o){if(es[0].isIntersecting){seen=true;fill(
 // report the page height, open Give links in the full window, and scroll the parent for in-page links.
 (function(){
 if(window.parent===window)return;
+// eden-valley.org shows its own pinned ribbon (logo + Give today) and its own footer, so hide ours.
+document.querySelector('header.top').style.display='none';
+document.querySelector('footer').style.display='none';
 function post(m){m.src='eden-gt';window.parent.postMessage(m,'*');}
 document.querySelectorAll('a[data-give],a[data-tier]').forEach(function(a){if(/^https?:/.test(a.getAttribute('href')))a.target='_top';});
 var last=0;
