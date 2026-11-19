@@ -18,6 +18,13 @@ img{max-width:100%}
 a{color:#00647B}a:hover{color:#004B5E}
 :focus-visible{outline:3px solid #E5A93B;outline-offset:3px;border-radius:4px}
 .top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(8px)}
+.gt-badge{display:flex;align-items:center;gap:18px}
+.gt-heart{width:158px;height:auto;flex:none;filter:drop-shadow(0 14px 18px rgba(0,0,0,.35));transform-origin:50% 10%;animation:gt-sway 4.5s ease-in-out infinite}
+@keyframes gt-sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(3deg)}}
+.gt-badge-text{font-size:20px;font-weight:700;line-height:1.3;color:#FFDC93}
+.gt-badge-text span{font-size:14px;font-weight:600;color:#D5E2E6}
+@media (max-width:600px){.gt-heart{width:104px}.gt-badge-text{font-size:17px}}
+@media (prefers-reduced-motion:reduce){.gt-heart{animation:none}}
 .gifts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 @media (max-width:960px){.gifts{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:600px){.gifts{grid-template-columns:1fr}}
@@ -56,7 +63,20 @@ a{color:#00647B}a:hover{color:#004B5E}
 <section id="top" style="background: linear-gradient(105deg, #003B4A 0%, #004B5E 45%, #0B6C84 100%); color: #FFFFFF">
 <div style="max-width: 1200px; margin: 0 auto; padding: 96px 32px 104px; display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
 <div style="flex: 1 1 520px; min-width: 0">
-<div style="display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: #FFDC93"><svg aria-hidden="true" width="18" height="16" viewBox="0 0 24 21" style="display:block;flex:none"><path d="M12 21 1.8 10.9A6.1 6.1 0 0 1 12 3.4a6.1 6.1 0 0 1 10.2 7.5Z" fill="#E5A93B"/></svg>Giving Tuesday: every gift doubled</div>
+<div class="gt-badge">
+<svg class="gt-heart" viewBox="0 0 230 210" role="img" aria-label="#GivingTuesday">
+<path d="M171 30 C 186 14, 204 6, 226 2" fill="none" stroke="#E5A93B" stroke-width="3" stroke-linecap="round"/>
+<path d="M168 34 C 184 22, 196 22, 222 14" fill="none" stroke="#C98A1B" stroke-width="2.5" stroke-linecap="round"/>
+<g transform="rotate(-9 110 110)">
+<path d="M110 196 C 48 150, 8 116, 8 72 C 8 40, 32 18, 62 18 C 84 18, 101 31, 110 49 C 119 31, 136 18, 158 18 C 188 18, 212 40, 212 72 C 212 116, 172 150, 110 196 Z" fill="#E2382E"/>
+<path d="M110 196 C 48 150, 8 116, 8 72 C 8 40, 32 18, 62 18 C 84 18, 101 31, 110 49" fill="none" stroke="#FF6A55" stroke-width="3" opacity=".55"/>
+<circle cx="166" cy="40" r="7" fill="#7A1D17"/>
+<text x="106" y="96" text-anchor="middle" font-family="'Archivo Black','Arial Black',sans-serif" font-size="34" fill="#FFFFFF">#Giving</text>
+<text x="108" y="134" text-anchor="middle" font-family="'Archivo Black','Arial Black',sans-serif" font-size="34" fill="#FFFFFF">Tuesday</text>
+</g>
+</svg>
+<span class="gt-badge-text">Every gift<br>doubled</span>
+</div>
 <h1 style="margin: 22px 0 26px; font-family: 'Archivo Black', 'Arial Black', sans-serif; font-weight: 400; font-size: clamp(40px, 5.2vw, 72px); line-height: 1.04; letter-spacing: 0.01em; text-transform: uppercase; color: #FFFFFF">Build a Home for Those Who Serve</h1>
 <p style="margin: 0; max-width: 34em; font-size: 19px; color: #E3F0F3">Two families are waiting, and this Giving Tuesday every gift is doubled to help break ground on the next staff home at Eden Valley.</p>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px 30px; margin-top: 38px">
