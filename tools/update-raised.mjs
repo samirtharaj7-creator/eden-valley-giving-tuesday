@@ -47,8 +47,7 @@ for (const t of all) {
   const src = `${t.entitySourceType || '?'} | ${t.entitySourceName || '?'} | ${t.entitySourceId || '?'}`;
   sources[src] = (sources[src] || 0) + 1;
   if (!isGift(t)) continue;
-  if (TEST) console.log('  match:', JSON.stringify({ status: t.status, liveMode: t.liveMode, amount: t.amount, amountRefunded: t.amountRefunded, currency: t.currency, keys: Object.keys(t).join(',') }));
-  if (t.liveMode === false) continue;              // Stripe test-mode payments
+  if (t.liveMode === false && !TEST) continue;              // Stripe test-mode payments
   if (!['succeeded', 'paid', 'partially_refunded'].includes(String(t.status).toLowerCase())) continue;
   const net = (Number(t.amount) || 0) - (Number(t.amountRefunded) || 0);
   if (net <= 0) continue;
