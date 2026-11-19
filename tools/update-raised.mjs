@@ -26,10 +26,16 @@ async function page(offset) {
 }
 
 // Is this transaction a gift through the Giving Tuesday form?
+// Fixed-amount payment links on the page ($50 to $5,000), all for product "Giving Tuesday Staff Housing Donation".
+const LINK_IDS = TEST ? [] : [
+  '6aff2301906a8b62055d7ed1', '6aff2335906a8b62055d7ed3', '6aff2362906a8b62055d7ed6',
+  '6aff238f906a8b62055d7ed9', '6aff23bb21a48a3872d278f0', '6aff23e921a48a3872d278f6',
+  '6afe821a906a8b62055d7ced', // older $100 x quantity link
+];
 function isGift(t) {
   const ids = [t.entitySourceId, t.entityId, t.meta?.formId, t.entitySource?.id].filter(Boolean);
   const names = [t.entitySourceName, t.entitySource?.name].filter(Boolean).join(' ');
-  return ids.includes(FORM_ID) || names.includes(FORM_NAME);
+  return ids.includes(FORM_ID) || ids.some(id => LINK_IDS.includes(id)) || names.includes(FORM_NAME);
 }
 
 const all = [];
