@@ -7,8 +7,10 @@ import { readFile, writeFile } from 'node:fs/promises';
 
 const TOKEN = process.env.GHL_TOKEN;
 const LOCATION = 'pcUHM2MDvoDgeO1iXSiT';            // Eden Valley Institute
-const FORM_ID = 'KsdUfOAakNQC9vXFIZuv';              // form "Giving Tuesday Donation"
-const FORM_NAME = 'Giving Tuesday Donation';
+// TEST_FORM_ID (optional) checks the counting against another form without saving anything.
+const TEST = process.env.TEST_FORM_ID || '';
+const FORM_ID = TEST || 'KsdUfOAakNQC9vXFIZuv';      // form "Giving Tuesday Donation"
+const FORM_NAME = TEST ? 'no-name-match' : 'Giving Tuesday Donation';
 const OUT = new URL('../raised.json', import.meta.url);
 const OFFLINE = new URL('../offline.json', import.meta.url);
 
@@ -53,6 +55,8 @@ for (const t of all) {
 }
 console.log(`Read ${all.length} transactions. Sources seen:`);
 for (const [s, n] of Object.entries(sources)) console.log(`  ${n} × ${s}`);
+
+if (TEST) { console.log(`TEST only, nothing saved: form ${TEST} has ${gifts} gifts totalling $${online.toFixed(2)}`); process.exit(0); }
 
 let offline = 0;
 try { offline = Number(JSON.parse(await readFile(OFFLINE, 'utf8')).offline) || 0; } catch {}

@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '*/10 * * * *'
   workflow_dispatch:
+    inputs:
+      test_form:
+        description: 'Test the counting on another form ID (saves nothing)'
+        required: false
+        default: ''
   repository_dispatch:
     types: [gift-received]
   push:
@@ -30,6 +35,7 @@ jobs:
       - name: Add up gifts from GoHighLevel
         env:
           GHL_TOKEN: ${{ secrets.GHL_TOKEN }}
+          TEST_FORM_ID: ${{ github.event.inputs.test_form }}
         run: node tools/update-raised.mjs
       - name: Save if changed
         run: |
