@@ -263,7 +263,7 @@ a{color:#00647B}a:hover{color:#004B5E}
 </div>
 
 <script>
-// Set the amount given so far (before the match). 30000 is a SAMPLE, not a real figure.
+// Fallback amount given so far (before the match). The live figure comes from raised.json.
 var RAISED = 0;
 // President's thank-you video. Paste a YouTube or Vimeo link, or a .mp4 file path/URL.
 // While empty, the placeholder box stays.
@@ -284,14 +284,21 @@ h='<video src="'+u+'" controls preload="metadata" playsinline style="width:100%;
 }
 f.innerHTML=h;f.style.display='block';
 }
-var v=Math.max(0,Math.min(75000,RAISED)),p=v/75000*100;
+var v=0,p=0,seen=false;
 function fmt(n){return '$'+Math.round(n).toLocaleString('en-US');}
+function show(amount){
+v=Math.max(0,Number(amount)||0);p=Math.min(v,75000)/75000*100;
 document.getElementById('giftsFmt').textContent=fmt(v);
-document.getElementById('totalFmt').textContent=fmt(v*2);
+document.getElementById('totalFmt').textContent=fmt(v+Math.min(v,75000));
+if(seen)fill();
+}
 function fill(){document.querySelectorAll('[data-bar]').forEach(function(e){e.style.width=(e.getAttribute('data-bar')==='gift'?p:p/2).toFixed(1)+'%';});}
+show(RAISED);
+// Live total: raised.json is updated from GoHighLevel by the GitHub job in .github/workflows/raised.yml
+fetch('raised.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(d){if(d&&typeof d.raised==='number')show(d.raised);}).catch(function(){});
 if('IntersectionObserver' in window){
-new IntersectionObserver(function(es,o){if(es[0].isIntersecting){fill();o.disconnect();}},{threshold:.4}).observe(document.getElementById('meter'));
-}else{fill();}
+new IntersectionObserver(function(es,o){if(es[0].isIntersecting){seen=true;fill();o.disconnect();}},{threshold:.4}).observe(document.getElementById('meter'));
+}else{seen=true;fill();}
 })();
 </script>
 </body>

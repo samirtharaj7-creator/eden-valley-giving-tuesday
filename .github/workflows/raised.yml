@@ -1,0 +1,42 @@
+name: Update amount raised
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+  repository_dispatch:
+    types: [gift-received]
+  push:
+    paths: [offline.json]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: raised
+  cancel-in-progress: false
+
+jobs:
+  raised:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Give GoHighLevel a moment after a payment
+        if: github.event_name == 'repository_dispatch'
+        run: sleep 20
+      - name: Add up gifts from GoHighLevel
+        env:
+          GHL_TOKEN: ${{ secrets.GHL_TOKEN }}
+        run: node tools/update-raised.mjs
+      - name: Save if changed
+        run: |
+          if git diff --quiet raised.json; then echo "Nothing to save"; exit 0; fi
+          git config user.name "gift-counter"
+          git config user.email "gift-counter@users.noreply.github.com"
+          git add raised.json
+          git commit -m "Update amount raised"
+          git pull --rebase
+          git push
