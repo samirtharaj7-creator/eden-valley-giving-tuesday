@@ -308,7 +308,7 @@ if(window.parent===window)return;
 function post(m){m.src='eden-gt';window.parent.postMessage(m,'*');}
 document.querySelectorAll('a[data-give]').forEach(function(a){if(/^https?:/.test(a.getAttribute('href')))a.target='_top';});
 var last=0;
-function height(){var h=document.documentElement.scrollHeight;if(h!==last){last=h;post({type:'height',h:h});}}
+function height(){var h=Math.ceil(document.body.getBoundingClientRect().height);if(h!==last){last=h;post({type:'height',h:h});}}
 if('ResizeObserver' in window)new ResizeObserver(height).observe(document.body);
 window.addEventListener('load',height);setInterval(height,1000);height();
 document.addEventListener('click',function(e){
