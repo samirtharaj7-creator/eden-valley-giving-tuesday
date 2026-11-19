@@ -18,6 +18,8 @@ img{max-width:100%}
 a{color:#00647B}a:hover{color:#004B5E}
 :focus-visible{outline:3px solid #E5A93B;outline-offset:3px;border-radius:4px}
 .top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(8px)}
+.foot{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
+@media (max-width:760px){.foot{grid-template-columns:1fr;gap:32px;text-align:center}.foot img{margin-left:auto!important;margin-right:auto!important}}
 .gt-badge{display:flex;align-items:center;gap:18px}
 .gt-heart{width:158px;height:auto;flex:none;filter:drop-shadow(0 14px 18px rgba(0,0,0,.35));transform-origin:50% 10%;animation:gt-sway 4.5s ease-in-out infinite}
 @keyframes gt-sway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(3deg)}}
@@ -320,10 +322,24 @@ a{color:#00647B}a:hover{color:#004B5E}
 </div>
 </section>
 
-<footer style="background: #E6F1F3; color: #4A5B61; font-size: 15px">
-<div style="max-width: 1200px; margin: 0 auto; padding: 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
-<img src="images/logo.webp" alt="Eden Valley Institute of Wellness" style="height: 36px; width: auto; display: block">
-<div>Eden Valley Institute of Wellness · 9325 World Mission Dr., Loveland, Colorado 80538</div>
+<footer style="background: linear-gradient(105deg, #003B4A, #004B5E 55%, #0B6C84); color: #E6F1F3; font-size: 16px; line-height: 1.6">
+<div class="foot" style="max-width: 1200px; margin: 0 auto; padding: 64px 32px 56px">
+<div>
+<img src="images/logo.webp" alt="Eden Valley Institute of Wellness" style="height: 64px; width: auto; display: block; margin-bottom: 22px">
+<p style="margin: 0">9325 World Mission Dr.<br>Loveland, Colorado 80538</p>
+</div>
+<div>
+<h2 style="font-family: 'Archivo Black', 'Arial Black', sans-serif; font-weight: 400; font-size: 18px; letter-spacing: .04em; text-transform: uppercase; color: #FFFFFF; margin: 0 0 18px">Hours</h2>
+<p style="margin: 0 0 10px">Monday – Thursday<br>8am – 5pm</p>
+<p style="margin: 0 0 10px">Friday<br>8am – 1pm</p>
+<p style="margin: 0">Saturday – Sunday<br>Closed</p>
+</div>
+<div>
+<h2 style="font-family: 'Archivo Black', 'Arial Black', sans-serif; font-weight: 400; font-size: 18px; letter-spacing: .04em; text-transform: uppercase; color: #FFFFFF; margin: 0 0 18px">Contact</h2>
+<p style="margin: 0 0 6px"><a href="mailto:office@eden-valley.org" style="color: #FFFFFF">office@eden-valley.org</a></p>
+<p style="margin: 0 0 6px"><a href="tel:+19706671770" style="color: #FFFFFF">(970) 667-1770</a></p>
+<p style="margin: 0"><a href="https://www.eden-valley.org" style="color: #7CC8DA">www.eden-valley.org</a></p>
+</div>
 </div>
 </footer>
 
