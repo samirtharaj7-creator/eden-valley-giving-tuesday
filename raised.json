@@ -1,6 +1,7 @@
 {
-  "raised": 0,
-  "online": 0,
+  "raised": 100,
+  "online": 100,
   "offline": 0,
-  "gifts": 0
+  "gifts": 1,
+  "updated": "2026-11-24T12:08:48.083Z"
 }
