@@ -354,7 +354,7 @@ a{color:#00647B}a:hover{color:#004B5E}
 var RAISED = 0;
 // President's thank-you video. Paste a YouTube or Vimeo link, or a .mp4 file path/URL.
 // While empty, the placeholder box stays.
-var VIDEO_URL = '';
+var VIDEO_URL = 'https://www.dropbox.com/scl/fi/zvv9vy44r7m477b4zjz74/Thanksgiving-Donation-Final.mp4?rlkey=wpqtcvu33wnwcseg9qmv0hv08&st=kzd45w7t&raw=1';
 // Donation form link. Paste the full URL here (e.g. 'https://...') and every Give button opens it.
 // While empty, the buttons scroll to the Ways to Give section.
 var DONATE_URL = 'https://api.leadconnectorhq.com/widget/form/KsdUfOAakNQC9vXFIZuv';
@@ -367,7 +367,7 @@ h='<iframe src="https://www.youtube-nocookie.com/embed/'+m[1]+'?rel=0" title="A 
 }else if(m=u.match(/vimeo\.com\/(?:video\/)?(\d+)/)){
 h='<iframe src="https://player.vimeo.com/video/'+m[1]+'" title="A thank-you from our president" allow="fullscreen; picture-in-picture" allowfullscreen style="width:100%;height:100%;border:0"></iframe>';
 }else{
-h='<video src="'+u+'" controls preload="metadata" playsinline style="width:100%;height:100%;display:block;background:#000"></video>';
+h='<video src="'+u+'" poster="images/video-poster.jpg" controls preload="metadata" playsinline style="width:100%;height:100%;display:block;background:#000"></video>';
 }
 f.innerHTML=h;f.style.display='block';
 }
